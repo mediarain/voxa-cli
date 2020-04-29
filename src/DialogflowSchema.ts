@@ -108,7 +108,10 @@ export class DialogflowSchema extends Schema {
     locale = locale.toLowerCase();
     const localesNotAttachedToParentLang = ["pt-br"];
 
-    if (localesNotAttachedToParentLang.find(item => locale === item)) {
+    if (
+      this.interactionOptions.ignoreDialogflowParentLocale ||
+      localesNotAttachedToParentLang.find(item => locale === item)
+    ) {
       return locale;
     }
 

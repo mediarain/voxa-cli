@@ -45,6 +45,7 @@ export interface IInteractionOptions {
   dialogflowSpreadsheets: string | string[];
   assets?: string[];
   assetsPath?: string;
+  ignoreDialogflowParentLocale?: boolean;
 }
 
 export interface IDefinedInteractionOptions {
@@ -59,6 +60,7 @@ export interface IDefinedInteractionOptions {
   dialogflowSpreadsheets: string | string[];
   assets: string[];
   assetsPath: string;
+  ignoreDialogflowParentLocale: boolean;
 }
 
 export const DEFAULT_INTERACTION_OPTIONS = {
@@ -68,7 +70,8 @@ export const DEFAULT_INTERACTION_OPTIONS = {
   viewsPath: "/",
   synonymPath: "synonyms",
   assets: [],
-  assetsPath: "assets"
+  assetsPath: "assets",
+  ignoreDialogflowParentLocale: false
 };
 
 function defaultOptions(interactionOptions: IInteractionOptions): IDefinedInteractionOptions {
@@ -84,6 +87,10 @@ function defaultOptions(interactionOptions: IInteractionOptions): IDefinedIntera
     interactionOptions.assetsPath || DEFAULT_INTERACTION_OPTIONS.assetsPath;
 
   const assets: string[] = interactionOptions.assets || DEFAULT_INTERACTION_OPTIONS.assets;
+
+  const ignoreDialogflowParentLocale: boolean =
+    interactionOptions.ignoreDialogflowParentLocale ||
+    DEFAULT_INTERACTION_OPTIONS.ignoreDialogflowParentLocale;
 
   const spreadsheets: string[] = arrayify(interactionOptions.spreadsheets) as string[];
 
@@ -141,7 +148,8 @@ function defaultOptions(interactionOptions: IInteractionOptions): IDefinedIntera
     assetsPath,
     contentPath,
     platforms,
-    assets
+    assets,
+    ignoreDialogflowParentLocale
   };
 }
 
